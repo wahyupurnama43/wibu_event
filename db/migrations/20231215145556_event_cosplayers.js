@@ -7,7 +7,6 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.integer("event_id");
     table.integer("cosplayer_id");
-    table.integer("user_id");
     table.timestamps(true, true);
   });
 };

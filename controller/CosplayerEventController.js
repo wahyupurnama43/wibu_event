@@ -4,6 +4,8 @@ const fs = require("fs").promises;
 
 class CosplayerEventController {
   static async index(req, res) {
+    // const
+
     res.render("pages/dashboard/cosplayerEvent/list", {
       page_name: "cosplayerEventList",
     });
