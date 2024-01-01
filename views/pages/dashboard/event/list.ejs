@@ -57,9 +57,12 @@
                     </div>
                   </div>
                 </td>
-                <td>
-                  <p class="text-sm font-weight-bold mb-0">
-                    <%- event.deskripsi_event %>
+                <td style="white-space: wrap">
+                  <p
+                    class="text-sm font-weight-bold mb-0 text-wrap"
+                    style="text-wrap: wrap; width: 40px; font-size: 12px"
+                  >
+                    <%- event.deskripsi_event.substring(0, 200); %>
                   </p>
                 </td>
                 <td>

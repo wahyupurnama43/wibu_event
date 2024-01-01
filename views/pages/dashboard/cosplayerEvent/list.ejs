@@ -32,7 +32,24 @@
                 <th></th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              <% eventsCosplayer.forEach(eventCos => { %>
+              <tr>
+                <td><%= eventCos.nama_event %></td>
+                <td><%= eventCos.nama_cosplayer %></td>
+                <td>
+                  <form action="/cosplayer-event/delete" method="post">
+                    <input
+                      type="hidden"
+                      value="<%= eventCos.id  %>"
+                      name="id"
+                    />
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                  </form>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
           </table>
         </div>
       </div>
@@ -62,18 +79,19 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form
-        action="/cosplayer/store"
-        method="post"
-        enctype="multipart/form-data"
-      >
+      <form action="/cosplayer-event/store" method="post">
         <div class="modal-body">
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="namaCosplayer">Nama Cosplayer</label>
                 <select name="namaCosplayer" id="" class="form-control">
-                  <option value="">Test</option>
+                  <option value="" selected disabled>Pilih Cosplayer</option>
+                  <% cosplayers.forEach(cosplayer => { %>
+                  <option value="<%= cosplayer.id  %>">
+                    <%= cosplayer.nama_cosplayer %>
+                  </option>
+                  <% }) %>
                 </select>
               </div>
             </div>
@@ -82,7 +100,12 @@
               <div class="form-group">
                 <label for="namaEvent">Nama Event</label>
                 <select name="namaEvent" id="" class="form-control">
-                  <option value="">Test</option>
+                  <option value="" selected disabled>Pilih Event</option>
+                  <% events.forEach(event => { %>
+                  <option value="<%= event.id  %>">
+                    <%= event.nama_event %>
+                  </option>
+                  <% }) %>
                 </select>
               </div>
             </div>
@@ -143,6 +166,16 @@
     className: "success",
     style: {
       background: "linear-gradient(to right, #00b09b, #00b09b)",
+    },
+  }).showToast();
+</script>
+<% } %> <% if(messages.error){ %>
+<script>
+  Toastify({
+    text: "<%= messages.error %>",
+    className: "error",
+    style: {
+      background: "linear-gradient(to right, #D80032, #D80032)",
     },
   }).showToast();
 </script>

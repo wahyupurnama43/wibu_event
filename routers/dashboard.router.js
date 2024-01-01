@@ -4,14 +4,11 @@ const upload = require("../middleware/upload");
 const EventController = require("../controller/EventController");
 const CosplayerController = require("../controller/CosplayerController");
 const CosplayerEventController = require("../controller/CosplayerEventController");
+const SearchController = require("../controller/SearchController");
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.render("pages/dashboard/index", {
-    page_name: "dashboard",
-  });
-});
+router.get("/", SearchController.all);
 
 // event router
 router.get("/event/list", EventController.index);
@@ -37,5 +34,11 @@ router.post("/cosplayer/delete", CosplayerController.delete);
 
 // event list event cosplayer
 router.get("/cosplayer-event/list", CosplayerEventController.index);
+router.post("/cosplayer-event/store", CosplayerEventController.store);
+router.post("/cosplayer-event/delete", CosplayerEventController.delete);
+
+// search
+
+router.get("/search/:page", SearchController.index);
 
 module.exports = router;
